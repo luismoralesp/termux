@@ -18,7 +18,7 @@ app.get('/photos', function (req, res) {
 app.post('/command', function (req, res) {
     let commands = req.body.command.split(' ')
     console.log(commands)
-
+    spawn("termux-wake-unlock")
     try {
         res.json({
             "response": spawn(commands.shift(), commands).stdout.toString()
