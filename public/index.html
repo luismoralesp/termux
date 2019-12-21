@@ -7,10 +7,11 @@
 <div id="main">
     
     <h1>Test command</h1>
-    <input id="command" type="text">
     <button id="send">Send</button>
 
     <textarea id="response" readonly></textarea>
+
+    <img id="image" />
 </div>
 
 <script>
@@ -18,11 +19,12 @@
         $.ajax({
             url:'/command',
             data: {
-                command: document.getElementById("command").value
+                command: "termux-camera-photo -c 0 public/mifoto.jpg" //document.getElementById("command").value
             },
             type: 'post',
             success: function(data){
                 document.getElementById("response").innerText = data.response
+                document.getElementById("image").src = "mifoto.jpg?" + new Date().getTime();
             }
         })
     }
