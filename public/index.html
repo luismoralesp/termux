@@ -1,0 +1,30 @@
+<h1>Photos</h1>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<div id="main">
+    
+    <h1>Test command</h1>
+    <input id="command" type="text">
+    <button id="send">Send</button>
+
+    <textarea id="response" readonly></textarea>
+</div>
+
+<script>
+    document.getElementById("send").onclick = function(){
+        $.ajax({
+            url:'/command',
+            data: {
+                command: document.getElementById("command").value
+            },
+            type: 'post',
+            success: function(data){
+                document.getElementById("response").innerText = data.response
+            }
+        })
+    }
+    
+</script>
