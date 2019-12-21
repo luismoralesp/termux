@@ -17,9 +17,17 @@ app.get('/photos', function (req, res) {
 
 app.post('/command', function (req, res) {
     console.log(req.body)
-    res.json({
-        "response": spawn(req.body.command).stdout.toString()
-    });
+    let commands = req.body.command.split(' ')
+
+    try {
+        res.json({
+            "response": spawn(commands.slice(1), commands).stdout.toString()
+        });
+    } catch (e){
+        res.json({
+            "response": e.message
+        });
+    }
   });
 
 app.listen(3000, function () {
