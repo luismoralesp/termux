@@ -16,12 +16,12 @@ app.get('/photos', function (req, res) {
 
 
 app.post('/command', function (req, res) {
-    console.log(req.body)
     let commands = req.body.command.split(' ')
+    console.log(commands)
 
     try {
         res.json({
-            "response": spawn(commands.slice(1), commands).stdout.toString()
+            "response": spawn(commands.shift(), commands).stdout.toString()
         });
     } catch (e){
         res.json({
