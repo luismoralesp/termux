@@ -22,7 +22,7 @@
         $.ajax({
             url:'/lamp',
             data: {
-                mode: this.checked
+                mode: this.checked? 'on': 'off'
             },
             type: 'post'
         })
