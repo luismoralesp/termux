@@ -24,10 +24,12 @@ app.post('/photo', function (req, res) {
           res.json({
             "response": spawn("termux-camera-photo", ["-c", "0", "public/mifoto.jpg"] ).stdout.toString()
           });
-          if (req.body.flash){
-            spawn("termux-torch", ["off"])
-          }
-        }, 3000)
+          setTimeout(() => {
+            if (req.body.flash){
+              spawn("termux-torch", ["off"])
+            }
+          }, 1000)
+        }, 1000)
         
         
     } catch (e){
