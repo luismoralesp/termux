@@ -28,8 +28,8 @@ app.post('/photo', function (req, res) {
             if (req.body.flash){
               spawn("termux-torch", ["off"])
             }
-          }, 1000)
-        }, 1000)
+          }, 2000)
+        }, 2000)
         
         
     } catch (e){
