@@ -22,7 +22,7 @@
         $.ajax({
             url:'/foto',
             data: {
-                flash: document.getElementById("flash").value == 'on'
+                flash: document.getElementById("flash").checked
             },
             type: 'post',
             success: function(data){
