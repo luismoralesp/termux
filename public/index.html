@@ -18,11 +18,20 @@
 </div>
 
 <script>
+    document.getElementById("flash").onchange = function(){
+        $.ajax({
+            url:'/lamp',
+            data: {
+                mode: this.checked
+            },
+            type: 'post'
+        })
+    }
     document.getElementById("Cam1").onclick = function(){
         $.ajax({
             url:'/photo',
             data: {
-                flash: document.getElementById("flash").checked
+                cam: "0"
             },
             type: 'post',
             success: function(data){
@@ -33,9 +42,9 @@
     }
     document.getElementById("Cam2").onclick = function(){
         $.ajax({
-            url:'/command',
+            url:'/photo',
             data: {
-                command: "termux-camera-photo -c 1 public/mifoto.jpg" //document.getElementById("command").value
+                cam: "1"
             },
             type: 'post',
             success: function(data){

@@ -8,30 +8,24 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static('public'));
 
-app.get('/photos', function (req, res) {
-  res.json([{
-      "hello": "word"
-  }]);
+app.post('/lamp', function (req, res) {
+  try {
+    res.json([{
+        "hello": spawn("termux-torch", [req.body.mode]).stdout.toString()
+    }]);
+  } catch (e){
+    res.json({
+        "response": e.message
+    });
+  }
 });
 
 
 app.post('/photo', function (req, res) {
     try {
-        if (req.body.flash){
-          spawn("termux-torch", ["on"])
-        }
-        setTimeout(() => {
-          res.json({
-            "response": spawn("termux-camera-photo", ["-c", "0", "public/mifoto.jpg"] ).stdout.toString()
-          });
-          setTimeout(() => {
-            if (req.body.flash){
-              spawn("termux-torch", ["off"])
-            }
-          }, 2000)
-        }, 2000)
-        
-        
+        res.json({
+          "response": spawn("termux-camera-photo", ["-c", req.body.cam, "public/mifoto.jpg"] ).stdout.toString()
+        });        
     } catch (e){
         res.json({
             "response": e.message
