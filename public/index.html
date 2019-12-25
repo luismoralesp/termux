@@ -5,6 +5,10 @@
 
 <div id="main" style="position:fixed; background: #fff; width: 100%; height: 100px; top: 0;">
     <h1 style="float: left;">Test command</h1>
+    <label for="flash" style="float: left; padding: 15px; margin: 10px;">
+        <input id="flash" type="checkbox">
+        Flash
+    </label>
     <button id="Cam1" style="float: left; padding: 15px; margin: 10px;">Cam1</button>
     <button id="Cam2" style="float: left; padding: 15px; margin: 10px;">Cam2</button>
     <textarea id="response" readonly style="float: left; margin: 10px; height: 50px;"></textarea>
@@ -16,9 +20,9 @@
 <script>
     document.getElementById("Cam1").onclick = function(){
         $.ajax({
-            url:'/command',
+            url:'/foto',
             data: {
-                command: "termux-camera-photo -c 0 public/mifoto.jpg" 
+                flash: document.getElementById("flash").value == 'on'
             },
             type: 'post',
             success: function(data){

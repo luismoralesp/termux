@@ -15,14 +15,18 @@ app.get('/photos', function (req, res) {
 });
 
 
-app.post('/command', function (req, res) {
-    let commands = req.body.command.split(' ')
-    console.log(commands)
-    spawn("termux-wake-unlock")
+app.post('/photo', function (req, res) {
+    let commands = "termux-camera-photo -c 0 public/mifoto.jpg" 
     try {
+        if (req.body.flash){
+          spawn("termux-torch", ["on"])
+        }
         res.json({
-            "response": spawn(commands.shift(), commands).stdout.toString()
+          "response": spawn(commands.shift(), commands).stdout.toString()
         });
+        if (req.body.flash){
+          spawn("termux-torch", ["off"])
+        }
     } catch (e){
         res.json({
             "response": e.message
